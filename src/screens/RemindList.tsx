@@ -1,15 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import React from 'react'
+import ReminderCard from '../components/global/customPaperComps/ReminderCard';
 
-export default function RemindList({route, navigation}) {
-    const {id, img, descr, time} = route.params;
-    console.log("route.params")
+export default function RemindList() {
   return (
-    <View>
-      <Text>RemindList</Text>
-      <Text>{id}</Text>
-    </View>
+    <SafeAreaView style={styles.mainContainer}>
+      <ReminderCard></ReminderCard>
+    </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex:1,
+    marginHorizontal:20
+  }
+})
