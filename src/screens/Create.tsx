@@ -19,7 +19,7 @@ const Create = () => {
           { !photo ? 
           (
             <View style={styles.photoContainer}>
-              <TouchableOpacity onPress={()=>setPhoto(true)} activeOpacity={0.7}>
+              <TouchableOpacity onPress={()=>setPhoto(true)} activeOpacity={0.7} style={styles.touchablePhotoContainer}>
                 <Image source={require('../../assets/imgs/Icons/createCam.png')} style={styles.img}/>
                 <Text style={{color:'grey', fontSize:10}}>Tomar foto para recordar mejor</Text>
               </TouchableOpacity>
@@ -48,19 +48,20 @@ const styles = StyleSheet.create({
       backgroundColor:' #72555555'
     },
     createContainer: {
-      height:'60%',
-      width:'100%',
+      flex:1
     },
     photoContainer: {
-      height:'60%',
-      width:'100%',
+      flex:1,
       backgroundColor:'lightblue',
+    },
+    touchablePhotoContainer: {
+      flex:1,
       justifyContent:'center',
       alignItems:'center'
     },
     img: {
-      height:'60%',
-      width: '60%',
+      height:'40%',
+      width: '40%',
     }
 });
 
