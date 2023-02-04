@@ -28,6 +28,7 @@ const Create = () => {
           : (<CameraComp cancelCamera={cancelCamera}></CameraComp>) }
           <TextInput
             mode='outlined'
+            multiline
             outlineColor={'grey'}
             outlineStyle={{borderWidth:3}}
             style={{flex:1}}
