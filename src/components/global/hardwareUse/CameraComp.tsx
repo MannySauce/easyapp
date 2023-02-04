@@ -2,7 +2,11 @@ import { Camera, CameraType } from 'expo-camera';
 import { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function CameraComp() {
+interface props {
+  cancelCamera: ()=> void
+}
+
+export default function CameraComp(props: props) {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
@@ -13,7 +17,7 @@ if (!permission){
 if (!permission?.granted){
     return (
         <View style={styles.container}>
-          <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+          <Text style={{ textAlign: 'center' }}>¡Necesitamos tu permiso para usar la camara, presione aqui!</Text>
           <Button onPress={requestPermission} title="grant permission" />
         </View>
       );
@@ -27,6 +31,9 @@ if (!permission?.granted){
     <View style={styles.container}>
       <Camera style={styles.camera} type={type}>
         <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={props.cancelCamera}>
+            <Text style={[styles.text, {color:'red'}]}>Cancelar</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <Text style={styles.text}>Flip Camera</Text>
           </TouchableOpacity>
@@ -48,7 +55,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         backgroundColor: 'transparent',
-        margin: 64,
+        margin: 20,
       },
       button: {
         flex: 1,

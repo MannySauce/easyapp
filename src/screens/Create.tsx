@@ -1,21 +1,67 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, Image, TouchableOpacity} from 'react-native'
 import React, { useState } from 'react'
-import CreateFAB from '../components/global/customPaperComps/CreateFAB'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { TextInput, Button } from 'react-native-paper';
 import CameraComp from '../components/global/hardwareUse/CameraComp';
 
-export default function Home() {
+const Create = () => {
   const [text, setText] = useState<string>();
+  const [photo, setPhoto] = useState<boolean>(false);
+
+  const cancelCamera = () => {
+    setPhoto(false);
+  };
+
   return (
-    <View style={styles.mainContainer}>
-      <CameraComp></CameraComp>
-    </View>
+    <SafeAreaView style={styles.mainContainer}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.createContainer}>
+          { !photo ? 
+          (
+            <View style={styles.photoContainer}>
+              <TouchableOpacity onPress={()=>setPhoto(true)} activeOpacity={0.7}>
+                <Image source={require('../../assets/imgs/Icons/createCam.png')} style={styles.img}/>
+                <Text style={{color:'grey', fontSize:10}}>Tomar foto para recordar mejor</Text>
+              </TouchableOpacity>
+            </View>
+          )
+          : (<CameraComp cancelCamera={cancelCamera}></CameraComp>) }
+          <TextInput
+            mode='outlined'
+            outlineColor={'grey'}
+            outlineStyle={{borderWidth:3}}
+            style={{flex:1}}
+            placeholder='Recordarme de... /En 10 minutos, horas, dias'
+            placeholderTextColor={'grey'}
+            value={text}
+            onChangeText={text => setText(text)}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
     mainContainer: {
-      flex:1
+      flex:1,
+      backgroundColor:' #72555555'
+    },
+    createContainer: {
+      height:'60%',
+      width:'100%',
+    },
+    photoContainer: {
+      height:'60%',
+      width:'100%',
+      backgroundColor:'lightblue',
+      justifyContent:'center',
+      alignItems:'center'
+    },
+    img: {
+      height:'60%',
+      width: '60%',
     }
-})
+});
+
+export default Create;
