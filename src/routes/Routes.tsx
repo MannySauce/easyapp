@@ -5,15 +5,21 @@ import CreateScreen from '../screens/Create';
 import DoneListScreen from '../screens/DoneList';
 import SettingsScreen from '../screens/Settings';
 
-const Tab = createMaterialBottomTabNavigator();
+
+export type StackParamsList = {
+    RemindList: undefined;
+    DoneList: undefined;
+    Create: undefined
+}
+const Tab = createMaterialBottomTabNavigator<StackParamsList>();
+
 
 const Routes = () => {
     return (
         <Tab.Navigator
             labeled={false}
             shifting={false}
-            barStyle={{ backgroundColor: '#694fad',  }}
-            initialRouteName={'RemindListScreen'}
+            barStyle={{ backgroundColor: '#694fad', height:70, margin:0}}
         >
             <Tab.Screen 
                 name='RemindList' 
@@ -25,7 +31,7 @@ const Routes = () => {
                 }}
             />
             <Tab.Screen 
-                name='Home' 
+                name='Create' 
                 component={CreateScreen} 
                 options={{tabBarLabel:"Create",
                     tabBarIcon: ({color}) => (
